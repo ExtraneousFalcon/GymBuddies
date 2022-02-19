@@ -1,0 +1,47 @@
+{% extends 'base/main.html' %}
+
+{% block content %}
+
+<header class="w3-container w3-blue w3-center" style="padding:50px 16px">
+    <h1 class="w3-margin">Register</h1>
+
+</header>
+
+<div class="card-body">
+    <h1> Create your account. </h1>
+    <p3>Already have an account? <a href="{% url 'login' %}">Login</a></p3>
+    <form method="POST">
+    {% csrf_token %}
+    <form>
+    <br>
+    <label> <b> {{form.username.label}} </b> </label>
+    <br>
+    {{form.username}}
+    <br> <br>
+    <label> <b> {{form.password1.label}} </b> </label>
+    <br>
+    {{form.password1}}
+    <br>
+
+    <p1>     Your password can’t be too similar to your other personal information. <br>
+        Your password must contain at least 8 characters. <br>
+        Your password can’t be a commonly used password.<br>
+        Your password can’t be entirely numeric. </p1> <br> <br>
+
+
+    <label> <b> {{form.password2.label}} </b></label>
+    <br>
+    {{form.password2}} <input style="margin-top:10px" class="button" type="submit" value="Register">
+    <br>
+
+    </form>
+
+<!-- 
+    Your password can’t be too similar to your other personal information.
+Your password must contain at least 8 characters.
+Your password can’t be a commonly used password.
+Your password can’t be entirely numeric.
+-->
+
+</div>
+{% endblock content %}

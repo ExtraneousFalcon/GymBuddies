@@ -1,0 +1,29 @@
+{% extends 'base/main.html' %}
+
+{% block content %}
+<header class="w3-container w3-blue w3-center" style="padding:50px 16px">
+    <h1 class="w3-margin">Login</h1>
+
+</header>
+
+<div class="card-body">
+    <form method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input class="button" type="submit" value="Login">
+    </form>
+    <p>Don't have an account? <a href="{% url 'register' %}">Register</a></p>
+    </div>
+{% endblock content %}
+
+
+<!-- <div class="card-body">
+<form method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input class="button" type="submit" value="Login">
+</form>
+<p>Don't have an account? <a href="{% url 'register' %}">Register</a></p>
+</div>
+ -->
+

@@ -1,0 +1,10 @@
+{% extends 'base/main.html' %}
+{% load static %}
+{% block content %}
+
+
+{% for workout in workouts %}
+{{workout.title}}
+{% endfor %}
+
+{% endblock content %}

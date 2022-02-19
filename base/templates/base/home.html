@@ -1,0 +1,57 @@
+{% extends 'base/main.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Header -->
+<header class="w3-container w3-blue w3-center" style="padding:128px 16px">
+    <h1 class="w3-margin w3-jumbo">Welcome to GymBuddies</h1>
+    <p class="w3-xlarge">Enhance your exercise experience</p>
+    <a href="{% url 'workouts' %}" class="w3-button w3-black w3-padding-large w3-large w3-margin-top">Start Workout</a>
+  </header>
+
+  <!-- First Grid -->
+<div class="w3-row-padding w3-white w3-padding-64 w3-container">
+    <div class="w3-content">
+      <div class="w3-twothird">
+        <h1>Our Goal</h1>
+        <h5 class="w3-padding-32">
+          Our central goal is to help you achieve your fitness goal. By recommending customized workouts and tracking incremental progress (PRs, weights used, etc.), we accompany you on your journey from start to finish. Unlike other websites and apps, we go the extra mile and build a supportive community where you can post about your workouts, celebrate your progress, and cheer on your buddies in their journey. With GymBuddies, you will never have to workout alone. 
+        </h5>
+  
+        <p class="w3-text-grey">With our robust logging system, data management, and analytics, we help incorporate a healthy lifestyle as part of your daily routine and ensure that you are on track towards your fitness and health goals, however you define them. Through our forum, you will have access to the journeys of thousands of others just like you, helping you gain insights into workout routines and techniques you can adapt into your own. We believe in growing together and welcoming you to our community.
+        </p>
+      </div>
+  
+      <div class="w3-third w3-container">
+        <p class="w3-padding-small w3-padding-16 w3-center"><img src="https://static.thenounproject.com/png/118696-200.png"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Second Grid -->
+  <div class="w3-row-padding w3-light-grey w3-padding-64 w3-container">
+    <div class="w3-content">
+      <div class="w3-twothird">
+        <h1>What we offer</h1>
+        <h5 class="w3-padding-32">Begin by using our create workout page to search for workout routines relating to the body part you wish to workout. This will display a picture and set of instructions to perform for each workout. Once you complete each workout, use our logging system to log the weights and number of reps and sets you performed. Finally, you can post your progress to our blog/social platform. 
+        Our blogging platform sets us apart from other fitness platforms and apps. GymBuddies allows users to post and view the progress of similar fitness enthusiasts. Use our create post feature to post and edit your personal blogs for other users to see and comment on.  
+        </h5>
+
+  
+        <p class="w3-text-grey">We built this using Django which incorporates Python and HTML to track and analyze the data of our users, enabling them to improve their individual fitness and workouts each day they go to the gym. 
+        </p>
+      </div>
+  
+      <div class="w3-third w3-container">
+        <p class="w3-padding-small w3-padding-16 w3-center"><img src="https://is5-ssl.mzstatic.com/image/thumb/Purple118/v4/41/23/73/4123737b-f429-d68a-8c2c-c7354682a48f/source/256x256bb.jpg"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Quote -->
+  <div class="w3-container w3-black w3-center w3-opacity w3-padding-64">
+    <h1 class="w3-margin w3-xlarge">Contact Us</h1>
+    <p>email: admin@gymbuddies.xyz</p>
+</div>
+
+{% endblock content %}
