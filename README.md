@@ -4,4 +4,4 @@ Our Goal: Our central goal is to help you achieve your fitness goal. By recommen
 
 What we offer: Begin by using our create workout page to search for workout routines relating to the body part you wish to workout. This will display a picture and set of instructions to perform for each workout. Once you complete each workout, use our logging system to log the weights and number of reps and sets you performed. Finally, you can post your progress to our blog/social platform. Our blogging platform sets us apart from other fitness platforms and apps. GymBuddies allows users to post and view the progress of similar fitness enthusiasts. Use our create post feature to post and edit your personal blogs for other users to see and comment on.
 
-Software used: We built this using Django which incorporates Python and HTML to track and analyze the data of our users, enabling them to improve their individual fitness and workouts each day they go to the gym.
+Software used: We built GymBuddies using Django framework (Python, HTML, CSS, JavaScript).
