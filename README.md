@@ -19,4 +19,4 @@ Begin by using our create workout page to search for workout routines relating t
 https://rapidapi.com/justin-WFnsXH_t6/api/exercisedb
 
 ## Visit the website!
-[Click here](gymbuddiesinc.herokuapp.com)
+gymbuddiesinc.herokuapp.com
