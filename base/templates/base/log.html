@@ -1,34 +1,37 @@
 {% extends 'base/main.html' %}
 {% load static %}
 {% block content %}
-
-<!DOCTYPE html>
-<html>
-<body>
-
-<header class="w3-container w3-blue w3-center" style="padding:50px 16px">
-    <h1 class="w3-margin w3-jumbo">My log</h1>
-        <p class="w3-large">Search workouts to start logging</p>
-        <form action="{% url 'workouts' %}" method="get">
-            <input type="text" name="muscles">
-            <button type="submit">Search</button>
-        </form>
+<header class="w3-container w3-blue w3-center" style="padding:64px 8px">
+  <h1 class="w3-margin">Add Logs</h1>
+  <p1> Keep up to date with your new records! </p1> <br>
 </header>
+<br>
+<br>
+<div class = "log">
+  <h3> Log Bench </h3>
+  <form  action="{% url 'add_bench' %}" method="get">
+    <input type="number" name="num">
+    <button type="submit">Log</button>
+  </form>
+</div>
+<br><br>
 
-<form>
-  <label for="fname">First name:</label><br>
-  <input type="text" id="fname" name="fname" value="John"><br>
-  <label for="lname">Last name:</label><br>
-  <input type="text" id="lname" name="lname" value="Doe">
-</form>
+<div class = "log">
+  <h3> Log Squat </h3>
+  <form  action="{% url 'add_squat' %}" method="get">
+    <input type="number" name="num">
+    <button type="submit">Log</button>
+  </form>
+</div>
+<br><br>
 
-<p>Note that the form itself is not visible.</p>
-
-<p>Also note that the default width of text input fields is 20 characters.</p>
-
-</body>
-</html>
-
+<div class = "log">
+  <h3> Log Weight </h3>
+  <form  action="{% url 'add_weight' %}" method="get">
+    <input type="number" name="num">
+    <button type="submit">Log</button>
+  </form>
+</div>
 
 
 {% endblock content %}

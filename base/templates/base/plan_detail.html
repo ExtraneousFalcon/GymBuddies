@@ -3,8 +3,16 @@
 {% block content %}
 
 <header class="w3-container w3-blue w3-center" style="padding:50px 16px">
-    <h1 class="w3-margin">Workout plan</h1>
+    <h1 class="w3-margin">{{plan.title}}Workout plan</h1>
 </header>
+
+{% for plan in plans %}
+<div class="card" style="width: 20rem;">
+    <h4>{{plan.title}}</h4>
+</div>
+
+{% endfor %}
+
 
 <div class="back">
     <a href="{% url 'plans' %}">&#8592; Back</a> <br> <br>
@@ -12,7 +20,7 @@
 
 <div class="back" style="align-items: center;">
 
-    <h4><a href="{% url 'workout_search' id %}">Add workout</a></h4>
+    <h3><a href="{% url 'workout_search' id %}">Add workout</a></h3>
 </div>
 
 {% for workout in workouts %}
@@ -21,10 +29,14 @@
     <h4>{{workout.title}}</h4>
     <img src="{{workout.gif}}">
     <br>
-    <br>
+    <div class="card-body">
+        <p class="card-text"> Equipment: {{workout.equipment}}</p>
+      </div>
 </div>
-
-
 
 {% endfor %}
 {% endblock content %}
+
+<!-- <header class="w3-container w3-blue w3-center" style="padding:50px 16px">
+    <h1 class="w3-margin">{{plan.title}}Workout plan</h1>
+</header> -->

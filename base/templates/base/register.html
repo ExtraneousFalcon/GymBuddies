@@ -7,19 +7,18 @@
 
 </header>
 
-<div class="card-body">
+<br>
+<div class="card-body" style="padding-left: 60px;">
     <h1> Create your account. </h1>
     <p3>Already have an account? <a href="{% url 'login' %}">Login</a></p3>
     <form method="POST">
     {% csrf_token %}
     <form>
     <br>
-    <label> <b> {{form.username.label}} </b> </label>
-    <br>
+    <h3> <b> Create your username: </b> </h3>
     {{form.username}}
     <br> <br>
-    <label> <b> {{form.password1.label}} </b> </label>
-    <br>
+    <h3> <b> Create your password: </b> </h3>
     {{form.password1}}
     <br>
 
@@ -29,9 +28,9 @@
         Your password can’t be entirely numeric. </p1> <br> <br>
 
 
-    <label> <b> {{form.password2.label}} </b></label>
-    <br>
-    {{form.password2}} <input style="margin-top:10px" class="button" type="submit" value="Register">
+    <h3> <b> Re-enter your password: </b></h3>
+    {{form.password2}} <br> <br>
+    <input style="margin-top:10px" class="button" type="submit" value="Register">
     <br>
 
     </form>

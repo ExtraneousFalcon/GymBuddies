@@ -1,5 +1,6 @@
 from ast import Del
 from re import template
+from sys import flags
 from typing import List
 from urllib import request
 from django.shortcuts import redirect, render
@@ -16,7 +17,7 @@ from django.contrib.auth import login
 from .models import Blog, Plan
 from .jsongen import json_data
 from django.contrib.auth.decorators import login_required
-from .models import Workout
+from .models import Workout, Log, Squat, Weight
 
 import datetime
 now = datetime.datetime.now()
@@ -139,9 +140,13 @@ class PlanCreate(LoginRequiredMixin, CreateView):
         self.object.save()
         return super().form_valid(form)
 
-
+@login_required(login_url='login/')
 def sample(request):
-    return render(request, "base/sample.html")
+    context = {
+        'array':Log.objects.filter(user=request.user).values_list('num', flat=True),
+        'array2':Squat.objects.filter(user=request.user).values_list('num', flat=True),
+        'array3':Weight.objects.filter(user=request.user).values_list('num', flat=True)}
+    return render(request, "base/sample.html", context)
 
 
 """class BlogUpdate(LoginRequiredMixin,UpdateView):
@@ -151,7 +156,7 @@ def sample(request):
     fields = ['title','description']
     success_url = reverse_lazy('blogs')"""
 
-
+@login_required(login_url='login/')
 def workout_search(request, id):
     print(id)
     l = []
@@ -171,27 +176,9 @@ def workout_search(request, id):
     context = {"workouts":l, 'id':id}
     return render(request, "base/workout_search.html", context)
 
-"""@login_required(login_url='login/')
-def workout_search(request, id):
-    l = []
-    search = request.GET.get("muscles")
-    if search is None:
-        return render(request, "base/workout_search.html")
-    search = search.lower()
-    curr = 0
-    for i in range(len(json_data)):
-        if curr == 10:
-            break
-        data = json_data[i]
-        body_part = data['bodyPart'].lower()
-        if search in body_part or search in data['target'].lower():
-            l.append(data)
-            curr += 1
-    context = {"workouts":l, 'id':id}
-    return render(request, "base/workout_search.html", context)"""
 
 
-
+@login_required(login_url='login/')
 def addworkout(request, name, id):
     plan = Plan.objects.get(pk=id)
     if(name not in list(Workout.objects.filter(plan=plan).values_list('title', flat=True))):
@@ -204,3 +191,44 @@ def addworkout(request, name, id):
 
     return render(request, "base/plan_detail.html", context)
 
+@login_required(login_url='login/')
+def add_bench(request):
+    num = request.GET.get("num")
+    l = Log(user=request.user, num=num)
+    l.save()
+    print(l.user)
+    context = {
+        'array':Log.objects.filter(user=request.user).values_list('num', flat=True),
+        'array2':Squat.objects.filter(user=request.user).values_list('num', flat=True),
+        'array3':Weight.objects.filter(user=request.user).values_list('num', flat=True)}
+    print(context['array'])
+    return render(request, "base/sample.html", context)
+
+@login_required(login_url='login/')
+def add_squat(request):
+    num = request.GET.get("num")
+    l = Squat(user=request.user, num=num)
+    l.save()
+    print(l.user)
+    context = {
+        'array':Log.objects.filter(user=request.user).values_list('num', flat=True),
+        'array2':Squat.objects.filter(user=request.user).values_list('num', flat=True),
+        'array3':Weight.objects.filter(user=request.user).values_list('num', flat=True)}
+    print(context['array2'])
+    return render(request, "base/sample.html", context)
+
+@login_required(login_url='login/')
+def add_weight(request):
+    num = request.GET.get("num")
+    l = Weight(user=request.user, num=num)
+    l.save()
+    context = {
+        'array':Log.objects.filter(user=request.user).values_list('num', flat=True),
+        'array2':Squat.objects.filter(user=request.user).values_list('num', flat=True),
+        'array3':Weight.objects.filter(user=request.user).values_list('num', flat=True)}
+    print(context['array3'])
+    return render(request, "base/sample.html", context)
+
+@login_required(login_url='login')
+def log(request):
+    return render(request, "base/log.html")

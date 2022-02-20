@@ -3,27 +3,19 @@
 {% block content %}
 <header class="w3-container w3-blue w3-center" style="padding:50px 16px">
     <h1 class="w3-margin">Login</h1>
-
+    <p> Create your account. It's free! </p>
 </header>
 
-<div class="card-body">
+<div class="card-body" style="padding-left: 60px;">
     <form method="POST">
-        {% csrf_token %}
-        {{form.as_p}}
+        {%csrf_token%}
+        <br>
+        <h3><b> Enter your username: </b></h3>
+        {{form.username}} <br> <br>
+        <h3><b> Enter your password: </b></h3>
+        {{form.password}} <br> <br>
         <input class="button" type="submit" value="Login">
     </form>
     <p>Don't have an account? <a href="{% url 'register' %}">Register</a></p>
     </div>
 {% endblock content %}
-
-
-<!-- <div class="card-body">
-<form method="POST">
-    {% csrf_token %}
-    {{form.as_p}}
-    <input class="button" type="submit" value="Login">
-</form>
-<p>Don't have an account? <a href="{% url 'register' %}">Register</a></p>
-</div>
- -->
-

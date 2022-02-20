@@ -33,4 +33,15 @@ class Workout(models.Model):
     title = models.CharField(max_length=200)
     gif = models.TextField(null=True,blank=True)
     equipment = models.CharField(max_length=200, null=True, blank=True)
-    log = [2, 3, 4]
+
+class Log(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    num = models.IntegerField()
+
+class Weight(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    num = models.IntegerField()
+
+class Squat(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    num = models.IntegerField()

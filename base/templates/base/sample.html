@@ -1,51 +1,110 @@
+{% extends 'base/main.html' %}
+{% block content %}
+
 <html>
+
+    <header class="w3-container w3-blue w3-center">
+        <h1 class="w3-margin">View Logs</h1>
+    </header>
 <head>
+
+<div class="back">
+        <a href="{% url 'log' %}">&#8592; Back to Add Logs</a> 
+    <br>
+</div>
+
   <script type="text/javascript">
+      benches = []
+      squats = []
+      weights = []
+      function logBench(){
+          {{ request.user }}
+          var b = document.getElementById('bench').value;
+          benches.push(Number(b))
+      }
+      function logSquat(){
+          var b = document.getElementById('squat').value;
+          squats.push(Number(b))
+      }
+      function logWeight(){
+          var b = document.getElementById('weight').value;
+          weights.push(Number(b))
+      }      
+    var dp = [];
+    {% for num in array %}
+      dp.push({{num}})
+    {% endfor %}
+    console.log(dp);
+
+    var dap = []
+    for(let i = 0; i < dp.length; i++){
+        dap.push({
+            x: i+1,
+            y:dp[i]
+        });
+    }
+    console.log(dap);
+
+    var dp2 = [];
+    {% for num in array2 %}
+      dp2.push({{num}})
+    {% endfor %}
+
+    var dap2 = []
+    for(let i = 0; i < dp2.length; i++){
+        dap2.push({
+            x: i+1,
+            y:dp2[i]
+        });
+    }
+    console.log(dap2);
+
+    var dp3 = [];
+    {% for num in array3 %}
+      dp3.push({{num}})
+    {% endfor %}
+
+    var dap3 = []
+    for(let i = 0; i < dp3.length; i++){
+        dap3.push({
+            x: i+1,
+            y:dp3[i]
+        });
+    }
+
+
+
   window.onload = function () {
     var chart1 = new CanvasJS.Chart("chartContainer1",{
     title :{
-        text: "Progress on Bench Press"
+        text: "Progress on Bench Press (lbs)"
     },
     data: [{
 	type: "line",
-  dataPoints: [
-        { x: 1, y: 205 },
-        { x: 2, y: 205 },
-        { x: 3, y: 210 },
-        { x: 4, y: 215 },
-        ]
+  dataPoints: dap
 
     }]
 });
 var chart2 = new CanvasJS.Chart("chartContainer2",{
     title :{
-	text: "Live Data"
+	text: "Progress on Squat (lbs)"
     },
     data: [{
-	type: "column",
-	dataPoints : [
-	    { label: "apple",  y: 10  },
-	    { label: "orange", y: 15  },
-	    { label: "banana", y: 25  },
-	    { label: "mango",  y: 30  },
-	    { label: "grape",  y: 28  }
-	]
+	type: "line",
+	dataPoints : dap2
     }]
 });
 
+
+
+
 var chart3 = new CanvasJS.Chart("chartContainer3",{
     title :{
-	text: "Live Data"
+	text: "Progress on Weight (lbs)"
     },
     data: [{
-	type: "column",
-	dataPoints : [
-	    { label: "apple",  y: 10  },
-	    { label: "orange", y: 15  },
-	    { label: "banana", y: 25  },
-	    { label: "mango",  y: 30  },
-	    { label: "grape",  y: 28  }
-	]
+	type: "line",
+	dataPoints : dap3
     }]
 });
  
@@ -56,8 +115,19 @@ chart3.render();
   }
   </script>
  <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
- <div id="chartContainer1" style="width: 45%; height: 300px;display: inline-block;"></div> <br/>
- <div id="chartContainer2" style="width: 45%; height: 300px;display: inline-block;"></div>
- <div id="chartContainer3" style="width: 45%; height: 300px;display: inline-block;"></div>
+
+ <div class = "log_graph">
+    <div id="chartContainer1" style="width: 45%; height: 300px;display: inline-block;"></div> <br/>
+ </div>
+<br><br>
+<div class = "log_graph">
+    <div id="chartContainer2" style="width: 45%; height: 300px;display: inline-block;"></div> <br/>
+</div>
+<br><br>
+<div class = "log_graph">
+    <div id="chartContainer3" style="width: 45%; height: 300px;display: inline-block;"></div> <br/> 
+</div>
+<br><br>
 </body>
 </html>
+{% endblock content %}

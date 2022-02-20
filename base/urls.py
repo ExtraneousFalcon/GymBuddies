@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import BlogCreate, PlanList, home, BlogList, plandetail, workout_search, CustomLoginView, RegisterPage, BlogDetail, planlist, PlanCreate, sample
-from .views import addworkout
+from .views import addworkout, add_bench, log, add_squat, add_weight
 from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
@@ -17,5 +17,9 @@ urlpatterns = [
     path('plan-create/',PlanCreate.as_view(),name="plan-create"),
     path('sample',sample, name="sample"),
     path('workout_search/<int:id>',workout_search, name="workout_search"),
-    path('addworkout/<str:name>/<int:id>', addworkout, name="addworkout")
+    path('addworkout/<str:name>/<int:id>', addworkout, name="addworkout"),
+    path('add_bench/',add_bench,name="add_bench"),
+    path('add_squat/',add_squat,name="add_squat"),
+    path('add_weight/',add_weight,name="add_weight"),
+    path('log/',log,name="log")
 ]

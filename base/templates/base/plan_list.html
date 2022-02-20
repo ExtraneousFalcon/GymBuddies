@@ -1,5 +1,5 @@
-
 {% extends 'base/main.html' %}
+{% load static %}
 {% block content %}
 <header class="w3-container w3-blue w3-center" style="padding:50px 16px">
     <h1 class="w3-margin">My Plan</h1>
@@ -11,9 +11,11 @@
 </div> <br>
 {% for plan in plans %}
 <div class="w3-container w3-center">
-    <div class="plan_card">
-        <h1><a href="{% url 'plan' plan.id %}">{{plan.title}}</a></h1>
-    </div>
+    <form method="post" action="">
+        <div class="plan_card">
+            <h1><a href="{% url 'plan' plan.id %}">{{plan.title}}</a></h1>
+        </div>
+    </form>
 </div>
 {% endfor %}
 
