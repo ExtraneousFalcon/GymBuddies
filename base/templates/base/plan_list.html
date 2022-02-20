@@ -1,0 +1,9 @@
+{% extends 'base/main.html' %}
+
+
+{% block content %}
+<a href="{% url 'plan-create' %}">Create a plan</a>
+{% for plan in plans %}
+<a href="{% url 'plan' plan.id %}">{{plan.title}}</a>
+{% endfor %}
+{% endblock content %}

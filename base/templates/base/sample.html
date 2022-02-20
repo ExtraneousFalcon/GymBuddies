@@ -1,0 +1,63 @@
+<html>
+<head>
+  <script type="text/javascript">
+  window.onload = function () {
+    var chart1 = new CanvasJS.Chart("chartContainer1",{
+    title :{
+        text: "Progress on Bench Press"
+    },
+    data: [{
+	type: "line",
+  dataPoints: [
+        { x: 1, y: 205 },
+        { x: 2, y: 205 },
+        { x: 3, y: 210 },
+        { x: 4, y: 215 },
+        ]
+
+    }]
+});
+var chart2 = new CanvasJS.Chart("chartContainer2",{
+    title :{
+	text: "Live Data"
+    },
+    data: [{
+	type: "column",
+	dataPoints : [
+	    { label: "apple",  y: 10  },
+	    { label: "orange", y: 15  },
+	    { label: "banana", y: 25  },
+	    { label: "mango",  y: 30  },
+	    { label: "grape",  y: 28  }
+	]
+    }]
+});
+
+var chart3 = new CanvasJS.Chart("chartContainer3",{
+    title :{
+	text: "Live Data"
+    },
+    data: [{
+	type: "column",
+	dataPoints : [
+	    { label: "apple",  y: 10  },
+	    { label: "orange", y: 15  },
+	    { label: "banana", y: 25  },
+	    { label: "mango",  y: 30  },
+	    { label: "grape",  y: 28  }
+	]
+    }]
+});
+ 
+chart1.render();
+chart2.render();
+chart3.render();
+
+  }
+  </script>
+ <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+ <div id="chartContainer1" style="width: 45%; height: 300px;display: inline-block;"></div> <br/>
+ <div id="chartContainer2" style="width: 45%; height: 300px;display: inline-block;"></div>
+ <div id="chartContainer3" style="width: 45%; height: 300px;display: inline-block;"></div>
+</body>
+</html>

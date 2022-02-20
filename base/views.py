@@ -1,5 +1,6 @@
 from ast import Del
 from re import template
+from typing import List
 from urllib import request
 from django.shortcuts import redirect, render
 from django.views.generic.list import ListView
@@ -12,7 +13,7 @@ from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
-from .models import Blog
+from .models import Blog, Plan
 from .jsongen import json_data
 from django.contrib.auth.decorators import login_required
 from .models import Workout
@@ -49,7 +50,7 @@ def workouts(request):
     l = []
     search = request.GET.get("muscles")
     if search is None:
-        return render(request, "base/workouts.html")
+        return render(request, "base/workout_search.html")
     search = search.lower()
     curr = 0
     for i in range(len(json_data)):
@@ -61,7 +62,7 @@ def workouts(request):
             l.append(data)
             curr += 1
     context = {"workouts":l}
-    return render(request, "base/workouts.html", context)
+    return render(request, "base/workout_search.html", context)
 
 class CustomLoginView(LoginView):
     template_name = "base/login.html"
@@ -110,6 +111,7 @@ class BlogDetail(LoginRequiredMixin, DetailView):
     context_object_name = "blog"
     template_name = "base/blog_detail.html"
 
+
 class BlogCreate(LoginRequiredMixin,CreateView):
     model = Blog
     template_name = "base/blog_form.html"
@@ -120,12 +122,49 @@ class BlogCreate(LoginRequiredMixin,CreateView):
         form.instance.user = self.request.user
         return super(BlogCreate, self).form_valid(form)
 
-class BlogUpdate(LoginRequiredMixin,UpdateView):
+class PlanList(LoginRequiredMixin, ListView):
+    login_url = "login/"
+    model = Plan
+    context_object_name = "plans"
+    template_name = "base/plan_list.html"
+
+@login_required(login_url='login/')
+def planlist(request):
+    context = {'plans': Plan.objects.filter(user=request.user)}
+    return render(request, "base/plan_list.html", context)
+
+@login_required(login_url='login/')
+def plandetail(request, id):
+    plan = Plan.objects.get(pk=id)
+    context = {'workouts': Workout.objects.filter(plan=plan)}
+    return render(request, "base/plan_detail.html", context)
+
+class PlanCreate(LoginRequiredMixin, CreateView):
+    model = Plan
+    template_name = "base/plan_create.html"
+    fields = ['title']
+    success_url = reverse_lazy('plans')
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        self.object.save()
+        return super().form_valid(form)
+
+
+def sample(request):
+    return render(request, "base/sample.html")
+
+
+"""class BlogUpdate(LoginRequiredMixin,UpdateView):
     login_url = "login/"
     model = Blog
     template_name = "base/blog_update.html"
     fields = ['title','description']
-    success_url = reverse_lazy('blogs')
+    success_url = reverse_lazy('blogs')"""
+
+
+
 
 
 def myworkout(request):
@@ -133,8 +172,10 @@ def myworkout(request):
     return render(request, "base/myworkout.html", context)
 
 def addworkout(request, name):
-    if(name not in list(Workout.objects.filter(user=request.user).values_list('title', flat=True))):
+    if(name not in list(Workout.objects.filter(plan=request.plan).values_list('title', flat=True))):
+        w = Workout(title=name, )
+    """if(name not in list(Workout.objects.filter(plan=request.user).values_list('title', flat=True))):
         w = Workout(title=name, user=request.user)
         w.save()
     context = {'workouts': Workout.objects.filter(user=request.user)}
-    return render(request, "base/myworkout.html", context)
+    return render(request, "base/myworkout.html", context)"""

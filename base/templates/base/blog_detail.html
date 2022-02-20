@@ -2,7 +2,13 @@
 {% load static %}
 
 {% block content %}
-<h1>{{blog.title}}</h1>
-<h4>{{blog.create}} {{blog.user}}</h4>
-<p>{{blog.description}}</p>
+
+<header class="w3-container w3-blue w3-center">
+    <h1 class="w3-margin">Register</h1>
+</header>
+<div class="blog_detail">
+    <h1>{{blog.title}}</h1>
+    <h4>{{blog.create}} {{blog.user}}</h4>
+    <p>{{blog.description}}</p>
+</div>
 {% endblock content %}

@@ -11,18 +11,22 @@
 
 <header class="w3-container w3-blue w3-center" style="padding:50px 16px">
     <h1 class="w3-margin">Blogs</h1>
-    <p3 class="w3-margin">Hit a new PR? Share your progress with the community.</p3>
+    <p3><a href="{%url 'blog-create' %}">Hit a new PR? Click here to share your progress with the community.</a></p3>
+    <br>
 </header>
+
     <body>
 {% for blog in blogs %}
-    <div class="leftcolumn">
-        <div class="card">
+    <div class="column">
+        <div class="blog_card">
             <h1><a href ="{% url 'blog' blog.id %}">{{blog}}</a></h1>
             <p>{{blog.description}}</p>
             <h4>by {{blog.user}}</h4>
-            <p><a href="{%url 'blog-create' %}">Create your own!</a></p>
         </div>
     </div>
 {% endfor %}
+
+
+<p><a href="{%url 'blog-create' %}">Create your own!</a></p>
 </body>
 {% endblock content %}

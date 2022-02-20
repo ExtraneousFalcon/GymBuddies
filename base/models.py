@@ -18,7 +18,13 @@ class Blog(models.Model):
     #    ordering = ['views']
 
 
+
+
+class Plan(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    title = models.CharField(max_length=200)
+
 class Workout(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    plan = models.ForeignKey(Plan, on_delete=models.CASCADE, null=True, blank=True)
     title = models.CharField(max_length=200)
     log = [2, 3, 4]

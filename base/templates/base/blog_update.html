@@ -2,19 +2,23 @@
 
 {% block content %}
 
-<div class="header-bar">
-    <a href="{% url 'home' %}">&#8592; Back</a>
+<div class = "blog_update">
+    <div class="header-bar">
+        <a href="{% url 'home' %}">&#8592; Back</a>
+    </div>
+
+    {% if user.id == blog.user.id %}
+    <div class="card-body">
+    <form method="POST" action="">
+        {{form.as_p}}
+        {% csrf_token %}
+        <input class="button" type="submit" value="Submit">
+        <br>
+    </form>
+    </div>
+    {% else %}
+    <p>Access denied! You cannot edit this page.</p>
+    {% endif %}
 </div>
-{% if user.id == blog.user.id %}
-<div class="card-body">
-<form method="POST" action="">
-    {{form.as_p}}
-    {% csrf_token %}
-    <input class="button" type="submit" value="Submit">
-</form>
-</div>
-{% else %}
- <p>Access denied! You cannot edit this page.</p>
- {% endif %}
     
 {% endblock content %}

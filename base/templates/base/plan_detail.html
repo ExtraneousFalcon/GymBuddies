@@ -1,10 +1,8 @@
 {% extends 'base/main.html' %}
-{% load static %}
+
 {% block content %}
-
-
+<a href="{% url 'workout_search' %}">Add workout</a>
 {% for workout in workouts %}
 {{workout.title}}
 {% endfor %}
-
 {% endblock content %}
