@@ -6,9 +6,17 @@
 <header class="w3-container w3-blue w3-center">
     <h1 class="w3-margin">Register</h1>
 </header>
+
+<br>
+<div style="padding-left: 50px">
+    <a href="{% url 'blogs' %}">&#8592; Back</a> <br> 
+</div>
+
 <div class="blog_detail">
     <h1>{{blog.title}}</h1>
+    <br>
     <h4>{{blog.create}} {{blog.user}}</h4>
+    <br>
     <p>{{blog.description}}</p>
 </div>
 {% endblock content %}

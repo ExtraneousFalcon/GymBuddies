@@ -2,22 +2,24 @@
 
 {% block content %}
   
+    <header class="w3-container w3-blue w3-center">
+        <h1 class="w3-margin">Blogs</h1>
+    </header>
+<br>
+<div class="blog_form" style="padding-left: 50px;">
+    <a href="{% url 'blogs' %}">&#8592; Back</a> <br> <br>
 
-<header class="w3-container w3-blue w3-center">
-    <h1 class="w3-margin">Blogs</h1>
-    <br>
-</header>
-
-
-<div class="back">
-    <a href="{% url 'home' %}">&#8592; Back</a>
-</div>
-
-<div class="card-body">
-    <form method="POST" action="">
-        {{form.as_p}}
-        {% csrf_token %}
-        <input class="button" type="submit" value="Submit">
-    </form>
+    <div class="card-body">
+        
+        <form method="POST" action="">
+            <label> <b> Enter the title of your post: </b> </label> <br>
+            {{form.title}} <br> <br>
+            <p1> <b> Enter a short description. Please be respectful. </b> </p1> <br>
+            {{form.description}} <br>
+            {% csrf_token %}
+            <input class="button" type="submit" value="Submit">
+            <br>
+        </form>
+    </div>
 </div>
 {% endblock content %}

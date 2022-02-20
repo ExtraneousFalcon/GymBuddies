@@ -1,14 +1,21 @@
 {% extends 'base/main.html' %}
 
 {% block content %}
-<div class="header-bar">
-    <a href="{% url 'home' %}">&#8592; Back</a>
+<header class="w3-container w3-blue w3-center">
+    <h1 class="w3-margin">Create Plan</h1>
+    <br>
+</header>
+
+<div class="back">
+    <a href="{% url 'plans' %}">&#8592; Back</a>
 </div>
-<div class="card-body">
-<form method="POST" action="">
-    {{form.as_p}}
+<div class="card-body"style="padding-left: 25px;"><br>
+    <form method="POST" action="">
+        <h1> <b> Enter the title of your workout: </b> </h1> <br>
+        {{form.title}} <br> <br>
     {% csrf_token %}
     <input class="button" type="submit" value="Submit">
 </form>
 </div>
 {% endblock content %}
+

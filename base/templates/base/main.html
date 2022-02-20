@@ -35,14 +35,33 @@
     .blog_card {
       align-items: center;
       text-align: center;
-      padding-top: 20px;
-      width: 1000px; 
+      padding-top: 5px;
+      width: 100%; 
       display: inline-block;  
       background: transparent;
       border-style: solid;
       border-width: 4px 4px 4px 4px;
       border-color: white;
+      padding-left: 45px;
+      padding-right: 45px;
+    }
+
+    .plan_card {
+      margin: 0 auto; /* Added */
+      float: none; /* Added */
+      margin-bottom: 10px; /* Added */
+      align-items: center;
+      text-align: center;
+      width: 500px; 
+      display: inline-block;  
+      background: transparent;
+      border-style: solid;
+      border-width: 6px 6px 6px 6px;
+      border-color:  rgb(230, 227, 227);
       border-radius: 0.3rem;
+      margin-left: 30%;      
+      margin-right: 35%;
+      background-color: rgb(232,232,232);
     }
 
     .new_blog {
@@ -58,7 +77,11 @@
 
     .blog_detail {
       padding: 40px;
-    }
+      padding-right: 80px;
+
+}
+    
+    
 
 
 /*
@@ -106,10 +129,11 @@
       <a href="{% url 'home' %}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-home fa-fw"></i> Home</a>
       <a href="{% url 'blogs' %}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i> Blogs</a>
       <a href="{% url 'plans' %}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-search fa-fw"></i> My Plans</a>
+      <a href="{% url 'plans' %}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-pencil fa-fw"></i> Logs</a>
       {% if request.user.is_authenticated %}
         <a href="{% url 'logout' %}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-arrow-left fa-fw"></i> Logout</a>
       {% else %}
-        <a href="{% url 'login' %}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-arrow-right fa-fw"></i> Login</a>
+        <a href="{% url 'login' %}" class="w3-bar-item w3-button w3-padding"><i class="fa fa-arrow-right fa-fw"></i> Login/Register</a>
       {% endif %}
 
     </div>

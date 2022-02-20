@@ -3,13 +3,18 @@
 {% block content %}
 
 <header class="w3-container w3-blue w3-center" style="padding:50px 16px">
-  <h1 class="w3-margin w3-jumbo">My log</h1>
+  <h1 class="w3-margin w3-jumbo">Exercise Database</h1>
   <p class="w3-large">Search workouts to start logging</p>
-  <form action="{% url 'workouts' %}" method="get">
+  <form action="{% url 'workout_search' id %}" method="get">
       <input type="text" name="muscles">
       <button type="submit">Search</button>
   </form>
 </header>
+
+<div style="padding-left: 50px">
+  <a href="{% url 'plan' id %}">&#8592; Back</a> <br> 
+</div>
+
 {% for workout in workouts %}
 <div class="card" style="width: 20rem;">
   <div class="card-body">
@@ -17,7 +22,7 @@
   </div>
     <img class="card-img-top" src="{{ workout.gifUrl }}" alt="Card image cap">
     <div class="card-body">
-      <form action="{% url 'addworkout' workout.name %}" method="post">
+      <form action="{% url 'addworkout' workout.name id %}" method="post">
         {% csrf_token %}
           <button type="submit">Add to workout</button>
       </form>

@@ -1,8 +1,30 @@
 {% extends 'base/main.html' %}
 
 {% block content %}
-<a href="{% url 'workout_search' %}">Add workout</a>
+
+<header class="w3-container w3-blue w3-center" style="padding:50px 16px">
+    <h1 class="w3-margin">Workout plan</h1>
+</header>
+
+<div class="back">
+    <a href="{% url 'plans' %}">&#8592; Back</a> <br> <br>
+</div>
+
+<div class="back" style="align-items: center;">
+
+    <h4><a href="{% url 'workout_search' id %}">Add workout</a></h4>
+</div>
+
 {% for workout in workouts %}
-{{workout.title}}
+
+<div class="card" style="width: 20rem;">
+    <h4>{{workout.title}}</h4>
+    <img src="{{workout.gif}}">
+    <br>
+    <br>
+</div>
+
+
+
 {% endfor %}
 {% endblock content %}

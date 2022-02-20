@@ -29,7 +29,13 @@ now = datetime.datetime.now()
             return redirect('login')
         return render(request, 'base/home.html')"""
 
-    
+d1 = dict()
+d2 = dict()
+for i in json_data:
+    name = i['name']
+    if name not in d1:
+        d1[name] = i['gifUrl']
+        d2[name] = i['equipment']
 
 
 def home(request):
@@ -45,24 +51,6 @@ def home(request):
     context = {"blogs":Blog.objects.all()}
     return render(request, "base/blogs.html", context)"""
 
-@login_required(login_url='login/')
-def workouts(request):
-    l = []
-    search = request.GET.get("muscles")
-    if search is None:
-        return render(request, "base/workout_search.html")
-    search = search.lower()
-    curr = 0
-    for i in range(len(json_data)):
-        if curr == 10:
-            break
-        data = json_data[i]
-        body_part = data['bodyPart'].lower()
-        if search in body_part or search in data['target'].lower():
-            l.append(data)
-            curr += 1
-    context = {"workouts":l}
-    return render(request, "base/workout_search.html", context)
 
 class CustomLoginView(LoginView):
     template_name = "base/login.html"
@@ -136,7 +124,7 @@ def planlist(request):
 @login_required(login_url='login/')
 def plandetail(request, id):
     plan = Plan.objects.get(pk=id)
-    context = {'workouts': Workout.objects.filter(plan=plan)}
+    context = {'workouts': Workout.objects.filter(plan=plan), 'id':id}
     return render(request, "base/plan_detail.html", context)
 
 class PlanCreate(LoginRequiredMixin, CreateView):
@@ -164,18 +152,55 @@ def sample(request):
     success_url = reverse_lazy('blogs')"""
 
 
+def workout_search(request, id):
+    print(id)
+    l = []
+    search = request.GET.get("muscles")
+    if search is None:
+        return render(request, "base/workout_search.html", {'id':id})
+    search = search.lower()
+    curr = 0
+    for i in range(len(json_data)):
+        if curr == 10:
+            break
+        data = json_data[i]
+        body_part = data['bodyPart'].lower()
+        if search in body_part or search in data['target'].lower():
+            l.append(data)
+            curr += 1
+    context = {"workouts":l, 'id':id}
+    return render(request, "base/workout_search.html", context)
+
+"""@login_required(login_url='login/')
+def workout_search(request, id):
+    l = []
+    search = request.GET.get("muscles")
+    if search is None:
+        return render(request, "base/workout_search.html")
+    search = search.lower()
+    curr = 0
+    for i in range(len(json_data)):
+        if curr == 10:
+            break
+        data = json_data[i]
+        body_part = data['bodyPart'].lower()
+        if search in body_part or search in data['target'].lower():
+            l.append(data)
+            curr += 1
+    context = {"workouts":l, 'id':id}
+    return render(request, "base/workout_search.html", context)"""
 
 
 
-def myworkout(request):
-    context = {'workouts': Workout.objects.filter(user=request.user)}
-    return render(request, "base/myworkout.html", context)
-
-def addworkout(request, name):
-    if(name not in list(Workout.objects.filter(plan=request.plan).values_list('title', flat=True))):
-        w = Workout(title=name, )
-    """if(name not in list(Workout.objects.filter(plan=request.user).values_list('title', flat=True))):
-        w = Workout(title=name, user=request.user)
+def addworkout(request, name, id):
+    plan = Plan.objects.get(pk=id)
+    if(name not in list(Workout.objects.filter(plan=plan).values_list('title', flat=True))):
+        w = Workout(title=name,plan=plan, gif=d1[name], equipment=d2[name])
         w.save()
-    context = {'workouts': Workout.objects.filter(user=request.user)}
-    return render(request, "base/myworkout.html", context)"""
+    workouts = Workout.objects.filter(plan=plan)
+    for i in workouts:
+        pass
+    context = {'workouts': Workout.objects.filter(plan=plan), 'id':id}
+
+    return render(request, "base/plan_detail.html", context)
+

@@ -14,8 +14,8 @@ class Blog(models.Model):
     def __str__(self):
         return self.title
     
-    #class Meta:
-    #    ordering = ['views']
+    class Meta:
+        ordering = ['-create']
 
 
 
@@ -23,8 +23,14 @@ class Blog(models.Model):
 class Plan(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
+    create = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-create']
 
 class Workout(models.Model):
     plan = models.ForeignKey(Plan, on_delete=models.CASCADE, null=True, blank=True)
     title = models.CharField(max_length=200)
+    gif = models.TextField(null=True,blank=True)
+    equipment = models.CharField(max_length=200, null=True, blank=True)
     log = [2, 3, 4]
