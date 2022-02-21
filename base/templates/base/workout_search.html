@@ -4,9 +4,9 @@
 
 <header class="w3-container w3-blue w3-center" style="padding:50px 16px">
   <h1 class="w3-margin w3-jumbo">Exercise Database</h1>
-  <p class="w3-large">Search workouts to start logging</p>
+  <p class="w3-large">Search muscle groups/workouts/equipment to start logging</p>
   <form action="{% url 'workout_search' id %}" method="get">
-      <input type="text" name="muscles">
+      <input type="text" name="muscles" placeholder="bicep/bench press">
       <button type="submit">Search</button>
   </form>
 </header>

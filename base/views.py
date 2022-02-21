@@ -161,18 +161,19 @@ def workout_search(request, id):
     print(id)
     l = []
     search = request.GET.get("muscles")
-    if search is None:
+    if search is None or search=="":
         return render(request, "base/workout_search.html", {'id':id})
     search = search.lower()
     curr = 0
     for i in range(len(json_data)):
-        if curr == 10:
+        if curr == 20:
             break
         data = json_data[i]
         body_part = data['bodyPart'].lower()
-        if search in body_part or search in data['target'].lower():
-            l.append(data)
-            curr += 1
+        if search in body_part or search in data['target'].lower() or search in data['name'].lower() or search in data['equipment'].lower():
+            if data['name'] not in Workout.objects.filter(plan=Plan.objects.get(pk=id)).values_list('title', flat=True):
+                l.append(data)
+                curr += 1
     context = {"workouts":l, 'id':id}
     return render(request, "base/workout_search.html", context)
 
